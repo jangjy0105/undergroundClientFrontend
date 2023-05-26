@@ -6,10 +6,6 @@ function Find(){
 
   return(
     <div className="find">
-      <div className="findBtns">
-        <button className={findMode ? "selectedFindBtn" : null} onClick={() => {setFindMode(true)}}>아이디 찾기</button>
-        <button className={findMode ? null : "selectedFindBtn"} onClick={() => {setFindMode(false)}}>비밀번호 찾기</button>
-      </div>
       <div className="confirmBtns">
         <div className="confirmBtnBox">
           <button>

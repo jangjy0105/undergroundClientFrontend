@@ -6,20 +6,13 @@ function Footer() {
   
   return(
     <footer>
-      <div>
+      <div className="menu">
         <span>고객센터</span>
-        <span>|</span>
         <span>후원</span>
-        <span>|</span>
         <span>개인정보</span>
-        <span>|</span>
         <span>법적고지</span>
-      </div>
-      <div>
         <span>about us</span>
-        <span>|</span>
         <span>문의하기</span>
-        <span>|</span>
         <span>대학 한눈에보기</span>
       </div>
       <pre>

@@ -26,8 +26,8 @@ function Player(){
   const [playbackRateModal, setPlaybackRateModal] = useState(false);
   const [reportModal, setReportModal] = useState(false);
 
-  const [volumeBtn, setVolumeBtn] = useState('/assets/volume.png');
-  const [playPauseBtn, setPlayPauseBtn] = useState('/assets/play.png');
+  const [volumeBtn, setVolumeBtn] = useState('/assets/volumeIcon.svg');
+  const [playPauseBtn, setPlayPauseBtn] = useState('/assets/playBtnIcon.svg');
 
   const [controlHide, setControlHide] = useState(true);
   const [cursorHide, setCursorHide] = useState(false);
@@ -45,7 +45,7 @@ function Player(){
 
   const format = (seconds) => {
     if(isNaN(seconds)) return "00:00";
-    
+    console.log(seconds);
     const date = new Date(seconds * 1000);
     const hh = date.getUTCHours();
     const mm = date.getUTCMinutes();
@@ -82,7 +82,7 @@ function Player(){
   }, 200);
     
   const playPause = () => {
-    setPlayPauseBtn(playerState.playing ? '/assets/play.png' : '/assets/pause.png')
+    setPlayPauseBtn(playerState.playing ? '/assets/playBtnIcon.svg' : '/assets/pauseBtnIcon.svg')
     setPlayerState({...playerState, playing: !playerState.playing});
     hideControlCursor();
   };
@@ -112,7 +112,7 @@ function Player(){
   };
   
   const mutedChange = () => {
-    setVolumeBtn(playerState.muted ? '/assets/volume.png' : '/assets/mutedVolume.png')
+    setVolumeBtn(playerState.muted ? '/assets/volumeIcon.svg' : '/assets/mutedVolume.png')
     setPlayerState({...playerState, muted: !playerState.muted})
   }
   
@@ -238,11 +238,11 @@ function Player(){
 
           <div className="topControls">
             <button className="backBtn" onClick={() => {navigate(-1)}}>
-              <img className="backBtnIcon" src={process.env.PUBLIC_URL+"/assets/back.png"} />
+              <img className="backBtnIcon" src={process.env.PUBLIC_URL+"/assets/backBtnIcon.svg"} />
             </button>
 
             <button className="reportBtn" onClick={() => {openReport()}}>
-              <img className="reportBtnIcon" src={process.env.PUBLIC_URL+"/assets/report.png"} />
+              <img className="reportBtnIcon" src={process.env.PUBLIC_URL+"/assets/reportBtnIcon.svg"} />
             </button>
           </div>
 
@@ -289,7 +289,7 @@ function Player(){
 
                 <div className="backwardForwardControl">
                   <button className="backwardBtn" onClick={backwardVideo}>
-                    <img className="backwardBtnIcon" src={process.env.PUBLIC_URL+"/assets/backward.png"} />
+                    <img className="backwardBtnIcon" src={process.env.PUBLIC_URL+"/assets/backwardBtnIcon.svg"} />
                   </button>
                   <button className="forwardBtn" onClick={forwardVideo}>
                     <img className="backwardBtnIcon" src={process.env.PUBLIC_URL+"/assets/forward.png"} />

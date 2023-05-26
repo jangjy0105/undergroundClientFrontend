@@ -1,18 +1,176 @@
 @import './responsive.scss';
 
+ul {
+  list-style-type: none;
+}
+
 button {
   cursor: pointer;
+}
+
+body {
+  overflow: overlay;
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+.showScrollbar::-webkit-scrollbar-thumb {
+  height: 5%; /* 스크롤바의 길이 */
+  background: rgba(255, 255, 255, 0.5); /* 스크롤바의 색상 */
+  
+  border-radius: 10px;
+}
+.showScrollbar::-webkit-scrollbar-track {
+  background: transparent;  /*스크롤바 뒷 배경 색상*/
+}
+
+.showScrollbar::-webkit-scrollbar {
+  width: 8px;  /* 스크롤바의 너비 */
+  height: 30px;
 }
 
 .App {
   background-color: #000;
   color: white;
   cursor: default;
-  
-  ul {
-    list-style-type: none;
+}
+
+
+.inputs {
+  text-align: center;
+  position: relative;
+  margin: auto;
+  margin-top: 100px;
+  width: 800px;
+
+  .inputName {
+    position: absolute;
+    left: 40px;
+  }
+
+  .inputBox {
+    margin: 30px 0;
+    width: 275px;
+    margin-left: 296px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+
+    input {
+      width: 206px;
+      height: 22px;
+      padding: 0;
+      border: solid 1px black;
+      text-align: center;
+    }
+    
+    select {
+      width: 208px;
+      height: 24px;
+      padding: 0;
+      border: solid 1px black;
+      text-align: center;
+    }
+    
+    textarea {
+      width: 206px;
+      height: 70px;
+      padding: 0;
+      border: solid 1px black;
+    }
+    
+    .checkbox {
+      
+      margin-right: 15px;
+      input {
+        height: auto;
+        width: auto;
+        margin: 0;
+        margin-right: 4px;
+        cursor: pointer;
+      }
+      span {
+        font-size: 15px;
+        cursor: pointer;
+      }
+    }
+
+    .dateInput {
+      display: flex;
+      flex-direction: row;
+      width: 300px;
+
+      span{
+        margin: 0 10px;
+      }
+
+      input {
+        width: 120px;
+      }
+    }
+    
+    .addBtns {
+      transform: translateX(208px);
+      position: absolute;
+      background-color: #fff;
+      height: 24px;
+      border: solid 1px black;
+    }
+  }
+  .addedDatas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    transform: translate(-10px, 14px);
+    width: 800px;
+
+    .addedDataBox {
+      background-color: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: row;
+      text-align: center;
+      width: 120px;
+      height: 19px;
+      border: 1px solid black;
+      margin: 5px;
+      
+      .addedData {
+        color: #000;
+        font-size: small;
+        width: 100px;
+        transform: translateX(10px);
+      }
+      
+      .delBtn {
+        background-color: rgba(0, 0, 0, 0);
+        border: none;
+      }  
+    }
   }
 }
+
+.upload {
+  width: 800px;
+  margin-top: 150px;
+  margin: 0 auto;
+  text-align: center;
+
+  .uploadBtn {
+    text-align: center;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+
+  
+}
+
 
 .modalOut {
   position: fixed;
@@ -24,15 +182,6 @@ button {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.closeBtn {
-  position: absolute;
-  top: 1px;
-  right: 1px;
-  background-color: rgba(0, 0, 0, 0);
-  color: #fff;
-  border: none;
-}
-
 header { // 시멘틱태그 공부
   width: 100%;
   position: fixed;
@@ -41,10 +190,16 @@ header { // 시멘틱태그 공부
   
   .logo {
     position: absolute;
-    left: 6.25vw;;
-    top: 20px;
+    left: 60px;;
+    top: 10px;
     background-color: rgba(0, 0, 0, 0);
     border: none;
+    .logoIcon {
+      width: 100px;
+      @include mobile {
+        width: 40px;
+      } 
+    }
   }
   
   nav{  // ul, li를 써보자!
@@ -60,14 +215,14 @@ header { // 시멘틱태그 공부
     .search {
       right: 15vw;
       .searchIcon {
-        width: 30px;
+        width: 25.32px;
       }
     }
     
     .menu {
       right: 6.25vw;
       .menuIcon {
-        width: 30px;
+        width: 21.17px;
       }
     }
   }
@@ -184,63 +339,162 @@ header { // 시멘틱태그 공부
   }
 
   .loginModal {
-    width: 450px;
-    height: 320px;
+    width: 700px;
+    height: 600px;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin: 10vh auto;
-    border: 1px solid black;
-    background-color: #404040;
+    border: none;
+    border-radius: 30px;
+    background-color: #000;
     color: #fff;
-    
     z-index: 9999;
-
-    .loginTitle {
-      margin-bottom: 5px;
-    }
-
-    .warnning {
-      height: 10px;
-      font-size: 10px;
-      color: red;
-    }
-
-    .hidedWarnning {
-      height: 10px;
-    }
-
-    .loginInput {
-      width: 70%;
-      height: 40px;
+    
+    .closeBtn {
+      position: absolute;
+      top: 31.67px;
+      right: 31.67px;
+      width: 18px;
+      height: 18px;
       background-color: rgba(0, 0, 0, 0);
       color: #fff;
-      outline: none;
       border: none;
-      border-bottom: 1px solid black;
-      margin-bottom: 30px;
+      padding: 0;
     }
-
-    .saveId{
-      width: 71%;
-      transform: translateY(-15px);
-      font-size: 13px;
-    }
-
-    .loginBtn {
-      width: 100px;
-      height: 40px;
+    
+    .backBtn {
+      position: absolute;
+      top: 31.67px;
+      left: 31.67px;
+      width: 18px;
+      height: 18px;
+      background-color: rgba(0, 0, 0, 0);
+      color: #fff;
       border: none;
-      background-color: #fff;
+      padding: 0;
     }
 
-    .loginMenuBtns {
-      margin-top: 10px;
-      button {
-        border: none;
-        color:#fff;
+    .login {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      .loginTitle {
+        margin-top: 80px;
+        margin-bottom: 62px;
+        font-weight: 500;
+        font-size: 40px;
+      }
+
+      .warnning {
+        height: 16px;
+        font-size: 12px;
+        color: red;
+        transform: translateY(-20px);
+      }
+
+      .hidedWarnning {
+        height: 16px;
+      }
+
+      .loginInput {
+        width: 400px;
+        height: 40px;
         background-color: rgba(0, 0, 0, 0);
+        color: #fff;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid #666666;
+        margin: 0 150px;
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+
+      .saveId{
+        width: 100px;
+        height: 24px;
+        align-self: flex-start;
+        margin-left: 150px;
+        font-size: 12px;
+        // transform: translateY(-15px);
+      }
+
+      .loginBtn {
+        width: 140px;
+        height: 60px;
+        margin-top: 66px;
+        border: none;
+        border-radius: 12px;
+        background-color: #fff;
+        font-weight: 600;
+        font-size: 26px;
+      }
+
+      .findBtn {
+        height: 24px;
+        margin-top: 14px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        color: #9D9D9D;
+        font-weight: 500;
+        font-size: 12px;
+      }
+
+      .RUMember {
+        width: 192px;
+        height: 16px;
+        padding: 0;
+        margin-top: 61px;
+        display: flex;
+        flex-direction: row;
+
+        span {
+          width: 132px;
+          font-weight: 500;
+          font-size: 12px;
+          color: #9D9D9D;
+        }
+        button {
+          margin-left: 12px;
+          width: 48px;
+          background-color: rgba(0, 0, 0, 0);
+          padding: 0;
+          font-weight: 600;
+          font-size: 12px;
+          color: #fff;
+          border: none;
+        }
+      }
+    }
+
+    .find {
+      width: 600px;
+      height: 286px;
+      margin: 0 auto;
+      transform: translateY(143px);
+      text-align: center;
+      border: solid 2px #4A4A4A;
+      border-radius: 12px;
+  
+      .confirmBtns {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 73px;
+  
+        button {
+          width: 140px;
+          height: 140px;
+          background-color: #1C1C1C;
+          border: none;
+          border-radius: 30px;
+        }
+
+        .confirmWay {
+          margin-top: 8px;
+          font-weight: 500;
+          font-size: 12px;
+        }
       }
     }
   }
@@ -257,21 +511,35 @@ header { // 시멘틱태그 공부
 footer {
   padding: 120px 0;
   text-align: center;
+  font-weight: 600;
   background-color: #000;
 
-  div {
-    margin: 10px;
+  .menu {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 600px;
+    margin: 0 auto;
+    justify-content: center;
+    span {
+      padding: 0 40px;
+      border-collapse: collapse;
+      margin: 5px 0;
+      margin-left: -1px;
+      border-left: solid 1px white;
+      border-right: solid 1px white;
+    }
   }
 
-  span {
-    margin: 10px
-  }
+  // span {
+  //   margin: 10px
+  // }
 }
 
 
 main {
   width: 100%;
-  overflow: hidden;  
+  overflow: hidden;
 
   .home{
     ul {
@@ -279,24 +547,73 @@ main {
     }
     @include desktop{
       .hero {
-        width: 100%;
-        height: 40vw;
+        .heroImg {
+          width: 100vw;
+          height: 800px;
+        }
+        .heroBtn {
+          position: absolute;
+          bottom: 30%;
+          right: 20%;
+          background-color: #fff;
+          color: #000;
+          width: 250px;
+          height: 50px;
+          border: none;
+          border-radius: 30px;
+          font-size: x-large;
+          font-weight: 900;
+        }
   
-        margin-bottom: 65px;
+        margin-bottom: 50px;
       }
     }
     @include tablet{
       .hero {
-        width: 100%;
-        height: 39.0625vw;
+        position: relative;
+
+        .heroImg {
+          width: 100%;
+          height: 500px;
+        }
   
+        .heroBtn {
+          position: absolute;
+          bottom: 15%;
+          right: 15%;
+          background-color: #fff;
+          color: #000;
+          width: 150px;
+          height: 40px;
+          border: none;
+          border-radius: 30px;
+          font-size: larger;
+          font-weight: 700;
+        }
         margin-bottom: 10px;
       }
     }
     @include mobile{
       .hero {
-        width: 100%;
-        height: 97.2vw;
+        position: relative;
+
+        .heroImg{
+          width: 100%;
+          height: 97.2vw;
+        }
+        .heroBtn {
+          position: absolute;
+          bottom: 10%;
+          right: 10%;
+          background-color: #fff;
+          color: #000;
+          width: 80px;
+          height: 20px;
+          border: none;
+          border-radius: 30px;
+          font-size: x-small;
+          font-weight: 700;
+        }
 
         margin-bottom: 14px;
       }
@@ -305,35 +622,35 @@ main {
       margin-top: 0;
       
       .movieList {
-        width: 100%;
+        // width: 100%;
         display: flex;
         flex-wrap: wrap;
-        align-items: center;
-        position: relative;
+        // align-items: center;
+        // position: relative;
         @include desktop{
-          margin-bottom: 65px;
+          margin-bottom: 10px;
           // transform: translateX(-80px);
           
           .voidReducedTag {
             width: 100%;
-            height: 35px;
+            height: 50px;
           }
 
           .reducedTag {
             width: 100%;
-            height: 35px;
+            height: 50px;
             margin-left: 10px;
-            text-align: start;
+            display: flex;
             
             .tagIcon {
-              width: 25px;
+              width: 50px;
             }
             
             .tagName {
-              position: relative;
-              bottom: 5px;
+              height: 50px;
+              line-height: 50px;
             }
-      
+            
           }
         }
         @include tablet{
@@ -344,20 +661,20 @@ main {
             width: 100%;
             height: 35px;
           }
-
+          
           .reducedTag {
             width: 100%;
             height: 35px;
             margin-left: 10px;
-            text-align: start;
+            display: flex;
             
             .tagIcon {
-              width: 25px;
+              width: 35px;
             }
             
             .tagName {
-              position: relative;
-              bottom: 5px;
+              height: 35px;
+              line-height: 35px;
             }
       
           }
@@ -376,7 +693,7 @@ main {
             width: 100%;
             height: 10px;
             margin-left: 10px;
-            text-align: start;
+            display: flex;
             
             .tagIcon {
               transform: translateY(-13px);
@@ -385,8 +702,8 @@ main {
             }
             
             .tagName {
-              position: relative;
-              bottom: 15px;
+              height: 10px;
+              line-height: 10px;
               font-size: xx-small;
             }
       
@@ -400,8 +717,11 @@ main {
           flex-direction: row;
           width: 100%;
           height: 100%;
-          padding-right: 36px;
-          padding-left: 40px;
+          padding-right: 25px;
+          padding-left: 100px;
+          @include mobile {
+            padding-left: 0;
+          }
           
           .tag {
             @include desktop {
@@ -429,7 +749,7 @@ main {
                 width: 80px;
               }
               @include tablet {
-                width: 50px;
+                width: 80px;
               }
               @include mobile {
                 width: 30px;
@@ -438,13 +758,18 @@ main {
             .tagName {
               @include desktop {
                 width: 80px;
+                font-weight: 600;
+                font-size: 20px;
               }
               @include tablet {
                 width: 80px;
+                font-weight: 600;
+                font-size: 15px;
               }
               @include mobile {
                 width: 50px;
-                font-size: x-small;
+                font-weight: 600;
+                font-size: 10px;
               }
             }
           }
@@ -486,6 +811,7 @@ main {
               .moviePoster { // ul, li로 묶기
                 width: 290px;
                 height: 163px;
+                border-radius: 20px;
               }
             }
             @include tablet {
@@ -493,6 +819,7 @@ main {
               .moviePoster { // ul, li로 묶기
                 width: 228px;
                 height: 124px;
+                border-radius: 20px;
               }
             }
             @include mobile {
@@ -500,6 +827,7 @@ main {
               .moviePoster { // ul, li로 묶기
                 width: 107px;
                 height: 60px;
+                border-radius: 20px;
               }
             }
             &:hover {
@@ -541,6 +869,12 @@ main {
                 background-color: rgba(0, 0, 0, 0);
                 color: white;
                 border: none;
+                .keepBtnIcon {
+                  width: 17.92px;
+                }
+                .detailBtnIcon{
+                  width: 13.33px;
+                }
               }
             }
           }
@@ -557,15 +891,30 @@ main {
     .detailModal { 
       background-color: #000;
       position: fixed;
+      border: none;
+      border-radius: 40px;
       top: 5%;
       left: 50%;
       transform: translate(-50%, 0);
       width: 600px;
       height: 800px;
       z-index: 9999;
-       
+      
+      .closeBtn {
+        position: absolute;
+        top: 31.67px;
+        right: 31.67px;
+        width: 18px;
+        height: 18px;
+        background-color: rgba(0, 0, 0, 0);
+        color: #fff;
+        border: none;
+        padding: 0; 
+      }
+
       .detailImg {
         width: 100%;
+        border-radius: 40px 40px 0 0;
        }
 
       .playBtn {
@@ -588,21 +937,60 @@ main {
       
        .detailInfo {
         width: 100%;
-        .runningTime {
-          width: 98%;
-          text-align: end;
-          font-size: 12px;
+        .topInfo {
+          .title {
+              
+          }
+          height: 80px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          // margin: 0 40px;
+          padding: 0 40px;
+
+          .score {
+            .fillScore {
+              position: absolute;
+              height: 21px;
+              z-index: 1;
+              .starContainer {
+                float: left;
+                width: 14px;
+                margin: 0 1px;
+                .star {
+                  float: left;
+                  color: yellow;
+                  overflow: hidden;
+                  transform: translateX(-1.2px);
+                }
+              }
+            }
+            .baseScore {
+              height: 21px;
+              .starContainer {
+                float: left;
+                width: 14px;
+                margin: 0 1px;
+                .star {
+                  float: left;
+                  color: grey;
+                  transform: translateX(-1.2px);
+                }
+              }
+            }
+          }
         }
-        .title {
-          margin-left: 37px;  
-        }
-        .summary {
-          margin: 0 37px;
-          font-size: 15px;
-        }
-        .otherInfo {
-          margin-top: 20px;
-          font-size: 15px;
+        .bodyInfo {
+          padding: 0 20px;
+          margin-top: 30px;
+          font-weight: 700;
+          font-size: 14px;
+          .summary {
+
+          }
+          .otherInfo {
+            color: #A7A7A7;
+          }
         }
         
        }
@@ -1115,104 +1503,9 @@ main {
       }
     }
 
-    .upload {
-      .inputs {
-        text-align: center;
-        position: relative;
-        margin: auto;
-        margin-top: 100px;
-        width: 500px;
-
-        .inputName {
-          position: absolute;
-          left: 40px;
-        }
-
-        .addBtns {
-          position: absolute;
-        }
-
-        .inputBox {
-          margin: 30px 0;
-
-          .fileInput {
-            display: none;
-          }
-
-          .fileInputBtn {
-            width: 70px;
-            height: 70px;
-            transform: translateY(-24.5px);
-          }
-
-          input {
-            width: 200px;
-            height: 18px;
-          }
-
-          textarea {
-            width: 200px;
-            height: 100px;
-          }
-
-          .addedDatas {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            margin: 5px 0;
-  
-            .addedDataBox {
-              background-color: #fff;
-              color: #000;
-              display: flex;
-              flex-direction: row;
-              text-align: center;
-              width: 120px;
-              height: 19px;
-              border: 1px solid black;
-              margin: auto 5px;
-              
-              .addedData {
-                color: #000;
-                font-size: small;
-                width: 100px;
-                transform: translateX(10px);
-              }
-              
-              .delBtn {
-                background-color: rgba(0, 0, 0, 0);
-                border: none;
-              }
-              
-            }
-  
-            // .void {
-            //   height: 21px;
-            //   background-color: rgba(0, 0, 0, 0);
-            // }
-          }
-          .genresBox {
-            margin: auto;
-            border: 1px solid white;
-            width: 208px;
-            
-            input {
-              width: 13px;
-              transform: translateY(3px);
-            }
-
-            .genreCheckbox {
-              margin: 0 2.5px;
-            }
-          }
-          select {
-            width: 208px;
-            height: 24px;
-            text-align: center;
-          }
-        }
-      }
-    }
+    
+      
+    
   }
 
   .account {

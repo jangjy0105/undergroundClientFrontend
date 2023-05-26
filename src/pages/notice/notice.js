@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
-import noticeData from "../noticeData"
+import noticeData from "../../noticeData"
 
 function Notice() {
   const data = noticeData.sort((a, b) => b.no - a.no);
