@@ -8,9 +8,9 @@ button {
   cursor: pointer;
 }
 
-body {
-  overflow: overlay;
-}
+// body {
+//   overflow: overlay;
+// }
 
 body::-webkit-scrollbar {
   width: 0;
@@ -20,7 +20,7 @@ body::-webkit-scrollbar {
 .showScrollbar::-webkit-scrollbar-thumb {
   height: 5%; /* 스크롤바의 길이 */
   background: rgba(255, 255, 255, 0.5); /* 스크롤바의 색상 */
-  
+  background-clip: content-box;
   border-radius: 10px;
 }
 .showScrollbar::-webkit-scrollbar-track {
