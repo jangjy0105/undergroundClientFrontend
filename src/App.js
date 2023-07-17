@@ -17,6 +17,7 @@ import RequestMovie from "./pages/requestMovie/requestMovie"
 import ScrollToTop from './components/scrollToTop';
 import Notice from "./pages/notice/notice"
 import Back from "./components/back"
+import axios from "axios"
 
 function App() {
 
@@ -28,18 +29,13 @@ function App() {
   const [searchModal, setSearchModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [detailModal, setDetailModal] = useState(-1);
-  const [scrollY, setScrollY] = useState(0);
-  
+
   useEffect(() => {
-    console.log('hi')
-    let timer = setTimeout(() => {
-      document.body.classList.remove('showScrollbar')
-    },1000);
-    return () => {
-      document.body.classList.add('showScrollbar')
-      clearTimeout(timer);
-    }; 
-  },[scrollY])
+    axios.get('/api/getHi')
+    .then((res) => {
+      console.log(res.data)
+    })
+  })
   
   useEffect(() => {
     const escKey = (e) => {
@@ -52,20 +48,10 @@ function App() {
         }
       }
     };
-    let timer;
-    const scrollEvent = (e) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        setScrollY(window.pageYOffset);
-      }, 10);
-    };
-    
+
     window.addEventListener("keyup", escKey);
-    window.addEventListener('scroll', scrollEvent);
     return () => {
       window.removeEventListener("keyup", escKey);
-      window.removeEventListener('scroll', scrollEvent);
-      
     }
   },[menuModal, searchModal, loginModal, detailModal])
 

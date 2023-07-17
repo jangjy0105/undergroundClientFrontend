@@ -8,28 +8,18 @@ button {
   cursor: pointer;
 }
 
-// body {
-//   overflow: overlay;
-// }
-
 body::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+  width: 8px;
 }
 
-.showScrollbar::-webkit-scrollbar-thumb {
-  height: 5%; /* 스크롤바의 길이 */
-  background: rgba(255, 255, 255, 0.5); /* 스크롤바의 색상 */
-  background-clip: content-box;
-  border-radius: 10px;
-}
-.showScrollbar::-webkit-scrollbar-track {
-  background: transparent;  /*스크롤바 뒷 배경 색상*/
+body::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
 }
 
-.showScrollbar::-webkit-scrollbar {
-  width: 8px;  /* 스크롤바의 너비 */
-  height: 30px;
+body::-webkit-scrollbar-track {
+  background: #000;
 }
 
 .App {
@@ -896,8 +886,8 @@ main {
       top: 5%;
       left: 50%;
       transform: translate(-50%, 0);
-      width: 600px;
-      height: 800px;
+      width: 800px;
+      height: 836px;
       z-index: 9999;
       
       .closeBtn {
