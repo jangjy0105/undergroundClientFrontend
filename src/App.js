@@ -31,7 +31,7 @@ function App() {
   const [detailModal, setDetailModal] = useState(-1);
 
   useEffect(() => {
-    axios.get('/api/getHi')
+    axios.get('/api/tag/getTag')
     .then((res) => {
       console.log(res.data)
     })
