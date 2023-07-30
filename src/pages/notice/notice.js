@@ -1,25 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import noticeData from "../../noticeData"
+import axios from "axios";
+import PostList from "../../components/postList";
 
 function Notice() {
-  const data = noticeData.sort((a, b) => b.no - a.no);
-  const notices = [];
-  const pages = [];
-  const [currPage, setCurrPage] = useState(1);
-  const totalPages = Math.ceil(data.length/10);
+  // const notices = [];
+  // const pages = [];
+  // const [currPage, setCurrPage] = useState(1);
+  // const totalPages = Math.ceil(dataLength/10);
+
+  const elements = {title: 'noticeTitle', content: 'noticteContent', createdDate: 'createdDate'};
   
-  for (let i=0; i<totalPages; i++) {
-    notices[i] = data.filter((notice, idx) => idx>=i*10 && idx<i*10+10);
-    pages[i] = i+1;
-  }
+  // for (let i=0; i<totalPages; i++) {
+  //   notices[i] = data.filter((notice, idx) => idx>=i*10 && idx<i*10+10);
+  //   pages[i] = i+1;
+  // }
 
   return(
-    <div className="notice">
-    <h1>공지</h1>
+    <div>
       <Routes>
-        <Route path="/" element={<NoticeList notices={notices} pages={pages} currPage={currPage} setCurrPage={setCurrPage}/>} />
-        <Route path={"/:id"} element={<NoticeDetail data={data} />} />
+        <Route path="/" element={<PostList elements={elements} api={'notice'} />} />
+        <Route path={"/:id"} element={<NoticeDetail  />} />
       </Routes>
     </div>
   )

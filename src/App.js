@@ -30,12 +30,12 @@ function App() {
   const [loginModal, setLoginModal] = useState(false);
   const [detailModal, setDetailModal] = useState(-1);
 
-  useEffect(() => {
-    axios.get('/api/tag/getTag')
-    .then((res) => {
-      console.log(res.data)
-    })
-  })
+  // useEffect(() => {
+  //   axios.get('/api/notice/getList')
+  //   .then((res) => {
+  //     console.log(res.data)
+  //   })
+  // }, [])
   
   useEffect(() => {
     const escKey = (e) => {

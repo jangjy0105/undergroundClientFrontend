@@ -1546,13 +1546,13 @@ main {
     }
   }
 
-  .notice {
-    text-align: center;
-    h1 {
-      margin-top: 100px;
-    }
+  
+  .postList {
     
-    .noticeList {
+      text-align: center;
+      h1 {
+        margin-top: 100px;
+      }
 
       .listBox {
         margin: auto;
@@ -1567,15 +1567,15 @@ main {
           li {
             display: flex;
             flex-direction: row;
-            justify-items: start;
+            // justify-items: center;
             border-bottom: solid 1px white;
             border-top: solid 1px white;
 
-            .no {
-              width: 17.25px;
+            .title {
+              width: 400px;
               margin: 10px 20px;
             }
-            .title {
+            .createdDate {
               margin: 10px 20px;
             }
           }
@@ -1605,7 +1605,7 @@ main {
         text-align: start;
       }
     }
-  }
+  
 
   .customerService{
     text-align: center;

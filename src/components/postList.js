@@ -1,48 +1,60 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-function List(props) {
+function PostList(props) {
 
-  const [listData, setListData] = useState([]);
+  const [listData, setListData] = useState(false);
 
-  const [listNum, setListNum] = useState(10);
-  const totalPage = Math.ceil(props.dataLength/listNum);
+  const [totalPage, setTotalPage] = useState(false) 
+  
   const pages = [];
   const [currPage, setCurrPage] = useState(1);
 
   for(let i=0; i<totalPage; i++) { pages[i] = i+1; }
 
+  // console.log(props.dataLength);
+
   const nextPage = () => { if (currPage !== pages[pages.length-1]) setCurrPage(currPage+1); }
   const prevPage = () => { if (currPage !== 1) setCurrPage(currPage-1); }
 
   useEffect(() => {
-    console.log(props.queryData);
-    const req = {page: currPage, listNum: listNum, sortOption:sortOption, queryData: props.queryData}
-    axios.post('/api/'+props.getListApi, req, {"Content-Type": 'application/json'})
+
+    axios.get('/api/'+props.api+'/getLength')
+    .then((res) => {
+      setTotalPage(Math.ceil(res.data[0].length/10));
+      console.log(res.data)
+    })
+
+    const req = {page: currPage}
+    axios.post('/api/'+props.api+'/getList', req, {"Content-Type": 'application/json'})
     .then((response) => {
       setListData(response.data);
     })
-  },[currPage, listNum, sortOption, props.queryData])
+  }, [currPage])
 
-  useEffect(() => {
-    setCurrPage(1);
-  }, [props.queryData]);
+  // useEffect(() => {
+  //   setCurrPage(1);
+  // }, [props.queryData]);
 
   return(
-    <>
+    <div className="postList">
+    <h1>공지</h1>
     <div className="listBox">
       <ul>
         <li>
-          <span className="no">No</span>
+          {/* <span className="no">No</span> */}
           <span className="title">제목</span>
+          <span className="createdDate">등록일</span>
         </li>
         {
-          listData[0] ?
+          listData ?
           listData.map((data) => {
             return (
 //              <li onClick={() => {navigate('/customerService/inquiry/'+inquiry.no)}}>
               <li>
-                <span className="no">{data.no}</span>
-                <span className="title">{data.title}</span>
+                {/* <span className="no">{data.no}</span> */}
+                <span className="title">{data[props.elements.title]}</span>
+                <span className="createdDate">{data[props.elements.createdDate]}</span>
               </li>
             )
           })
@@ -63,7 +75,9 @@ function List(props) {
         <button onClick={nextPage}>{'>'}</button>
         <button onClick={() => {setCurrPage(pages[pages.length-1])}}>{'>>'}</button>
       </div>
-    </>
+    </div>
   )
 
 }
+
+export default PostList;
