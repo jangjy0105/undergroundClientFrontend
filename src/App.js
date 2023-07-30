@@ -17,6 +17,7 @@ import RequestMovie from "./pages/requestMovie/requestMovie"
 import ScrollToTop from './components/scrollToTop';
 import Notice from "./pages/notice/notice"
 import Back from "./components/back"
+import TagDetail from './tagDetail.js';
 
 function App() {
 
@@ -30,17 +31,7 @@ function App() {
   const [detailModal, setDetailModal] = useState(-1);
   const [scrollY, setScrollY] = useState(0);
   
-  useEffect(() => {
-    console.log('hi')
-    let timer = setTimeout(() => {
-      document.body.classList.remove('showScrollbar')
-    },1000);
-    return () => {
-      document.body.classList.add('showScrollbar')
-      clearTimeout(timer);
-    }; 
-  },[scrollY])
-  
+
   useEffect(() => {
     const escKey = (e) => {
       if(e.keyCode === 27){
@@ -61,10 +52,10 @@ function App() {
     };
     
     window.addEventListener("keyup", escKey);
-    window.addEventListener('scroll', scrollEvent);
+    
     return () => {
       window.removeEventListener("keyup", escKey);
-      window.removeEventListener('scroll', scrollEvent);
+      
       
     }
   },[menuModal, searchModal, loginModal, detailModal])
@@ -86,6 +77,7 @@ function App() {
           <Route path={"/search/:searchWord"} element={<Search movies={movies} />} />
           <Route path={"/requestMovie/*"} element={<RequestMovie />} />
           <Route path={"/notice/*"} element={<Notice />} />
+          <Route path={"/tagDetail/:tagId"} element={<TagDetail/>} />
         </Routes>
       </main>
 

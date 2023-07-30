@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 
 function Main(props){
   
@@ -77,33 +77,44 @@ function MovieLists(props) {
       }
     }
 
-  return(
-    <div>
-      <ul className="movieList">
-      {scrolled > 1 ? <ReducedTag tag={props.tag} /> : <div className='voidReducedTag'/>}
-        <ul className="movieScroll" ref={ref}>
-          {scrolled ? <button className='prevBtn' onClick={() => {
-            ref.current.scrollBy({left:-500, behavior:'smooth'})
-          }}>◀</button>: null}
-        <div className='tag'>
-          <div>
-            <img src={process.env.PUBLIC_URL + props.tag.tagIcon} className='tagIcon'/>
-            <div className='tagName'>{props.tag.tagName.replace('학교','')}</div>
-          </div>
-        </div> 
-          <TagMovies movies={tagMovies} setDetailModal={props.setDetailModal} />
+    const TagClick = (tagId) => {
+      navigate(`/tagDetail/${tagId}`);
+    }
 
-          {
-            scrolled === 3 ?
-            null:
-          <button className="nextBtn" onClick={() => {
-            ref.current.scrollBy({left:500, behavior:'smooth'})
-          }}>▶</button>
-          
-          }
+    return (
+      <div>
+        <ul className="movieList">
+          {scrolled > 1 ? <ReducedTag tag={props.tag} /> : <div className='voidReducedTag'/>}
+          <ul className="movieScroll" ref={ref}>
+            {scrolled ? (
+              <button className='prevBtn' onClick={() => ref.current.scrollBy({ left: -500, behavior: 'smooth' })}>◀</button>
+            ) : null}
+            <div className='tag' onClick={() => TagClick(props.tag.id)}>
+              <div>
+                <img src={process.env.PUBLIC_URL + props.tag.tagIcon} className='tagIcon' />
+                <div className='tagName'>{props.tag.tagName.replace('학교', '')}</div>
+              </div>
+            </div>
+            <TagMovies movies={tagMovies} setDetailModal={props.setDetailModal} />
+            {scrolled === 3 ? null : (
+              <button className="nextBtn" onClick={() => ref.current.scrollBy({ left: 500, behavior: 'smooth' })}>▶</button>
+            )}
+          </ul>
         </ul>
-        
-      </ul>
+      </div>
+    );
+}
+
+function Tag(props) {
+  const navigate = useNavigate();
+  const TagClick = () => {
+    navigate('/tagDetail/{props.tag.id}');
+  }
+
+  return (
+    <div className='tag'>
+      <img src={process.env.PUBLIC_URL + props.tag.tagIcon} className='tagIcon' onClick={TagClick} />
+      <div className='tagName'>{props.tag.tagName.replace('학교','')}</div>
     </div>
   )
 }
@@ -119,31 +130,30 @@ function ReducedTag(props) {
 
 function TagMovies(props) {
   const navigate = useNavigate();
-  return(
+
+  return (
     <>
-    {
-    props.movies.map((movie) => {
-      return(
-        <li className='movie' key={movie.id}>
-          <div className='layer' onClick={() => {navigate('/player/'+movie.id)}} />
-          <img className="moviePoster" src={process.env.PUBLIC_URL + movie.posterImg} />
-          <div className='movieInfo'>
-            <div className='title'>{movie.title}</div>
-            <div className='movieMenu'>
-              <button>
-                <img className='keepBtnIcon' src={process.env.PUBLIC_URL + "/assets/keepIcon.svg"} />
-              </button>
-              <button onClick={() => {props.setDetailModal(movie.id)}}>
-                <img className='detailBtnIcon' src={process.env.PUBLIC_URL + "/assets/detailIcon.svg"} />
-              </button>
+      {props.movies.map((movie) => {
+        return (
+          <li className='movie' key={movie.id}>
+            <div className='layer' onClick={() => { navigate('/player/'+movie.id) }} />
+            <img className="moviePoster" src={process.env.PUBLIC_URL + movie.posterImg} />
+            <div className='movieInfo'>
+              <div className='title'>{movie.title}</div>
+              <div className='movieMenu'>
+                <button>
+                  <img className='keepBtnIcon' src={process.env.PUBLIC_URL + "/assets/keepIcon.svg"} />
+                </button>
+                <button onClick={() => { props.setDetailModal(movie.id) }}>
+                  <img className='detailBtnIcon' src={process.env.PUBLIC_URL + "/assets/detailIcon.svg"} />
+                </button>
+              </div>
             </div>
-          </div>
-        </li>
-      )
-    })
-  }
-  </>
-  )
+          </li>
+        );
+      })}
+    </>
+  );
 }
 
 function DetailModal(props) {
@@ -190,7 +200,7 @@ function DetailModal(props) {
             </div>
           </div>
           <div className='bodyInfo'>
-            <div className='summary'>CHECK THIS OUT 나는 정 상 수백발백중 하는 명 사 수부산진구 유명가수일취월장 하며 성장 중내가 대표해 이 거리를누구도 막지 못해 내 지껄임을사양할게 너의 벌쓰 피처링은이건 나의 TRACK MY SWAG노린 RAP ATTACK난 계속해서 매섭게 쏘겠어죄 속에서 날 대속해 주신 주</div>
+            <div className='summary'>간략한 줄거리들</div>
             <ul className='otherInfo'>
               <li>개봉일 : 2001년 1월 5일</li>
               <li>감독 : 장재영</li>

@@ -158,6 +158,8 @@ main {
     margin-bottom: 65px;
   }
 }
+
+
 @media (max-width: 1280px) and (min-width: 500px) {
   main .home .hero {
     width: 100vw;
