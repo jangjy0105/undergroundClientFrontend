@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { useNavigate, useParams } from "react-router-dom";
 import movieData from "../../movieData";
-import Comment from "../../components/Comment";
+import WrapComments from "../../components/wrapcomment";
 
 function Player(){
   
@@ -404,7 +404,7 @@ function Player(){
           <h4>{movieInfo[id]}</h4>
 
           <div>
-            <Comment />
+            <WrapComments />
           </div>
 
         </div>

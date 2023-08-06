@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import Comment from './Comment';
+import Comment from './comment';
 
 function CommentLists({ CommentLists, editComment }) {
   const [selectedCommentIndex, setSelectedCommentIndex] = useState(0);

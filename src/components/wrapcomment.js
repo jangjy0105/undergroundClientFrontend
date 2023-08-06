@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import CommentLists from './CommentLists';
+import CommentLists from './commentList';
 
 export default function WrapComments({ comments }) {
     const [commentLists, setCommentLists] = useState(comments);
