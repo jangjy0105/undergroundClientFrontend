@@ -18,6 +18,7 @@ import ScrollToTop from './components/scrollToTop';
 import Notice from "./pages/notice/notice"
 import Back from "./components/back"
 import axios from "axios"
+import TagDetail from './tagDetail.js';
 
 function App() {
 
@@ -29,14 +30,9 @@ function App() {
   const [searchModal, setSearchModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [detailModal, setDetailModal] = useState(-1);
-
-  // useEffect(() => {
-  //   axios.get('/api/notice/getList')
-  //   .then((res) => {
-  //     console.log(res.data)
-  //   })
-  // }, [])
+  const [scrollY, setScrollY] = useState(0);
   
+
   useEffect(() => {
     const escKey = (e) => {
       if(e.keyCode === 27){
@@ -72,6 +68,7 @@ function App() {
           <Route path={"/search/:searchWord"} element={<Search movies={movies} />} />
           <Route path={"/requestMovie/*"} element={<RequestMovie />} />
           <Route path={"/notice/*"} element={<Notice />} />
+          <Route path={"/tagDetail/:tagId"} element={<TagDetail/>} />
         </Routes>
       </main>
 

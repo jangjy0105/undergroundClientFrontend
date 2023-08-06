@@ -9,17 +9,18 @@ button {
 }
 
 body::-webkit-scrollbar {
-  width: 8px;
+  width: 8px;  /* 스크롤바의 너비 */
 }
 
 body::-webkit-scrollbar-thumb {
-  height: 30%;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 16px;
+  height: 30%; /* 스크롤바의 길이 */
+  background: #9999997d; /* 스크롤바의 색상 */
+
+  border-radius: 10px;
 }
 
 body::-webkit-scrollbar-track {
-  background: #000;
+  background: rgba(33, 122, 244, .1);  /* 스크롤바 뒷 배경 색상*/
 }
 
 .App {
@@ -1122,8 +1123,37 @@ main {
 
   .player {
 
-    .qwer {
+    .playerdetail {
+      padding-top: 60px;
+      padding-left: 250px;
+      padding-right:250px;
       height: 1000px;
+     
+      .playermain{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .custom-textarea {
+        resize:none;
+        background-color: #404040;
+        color:white;
+      }
+
+      .custom-button{
+        background-color :#404040;
+        color: white;
+      }
+      
+    }
+    .tagmain {
+      color: white;
+      margin-top: 1000px;
+    }
+
+    .tagId{
+      margin-top: 100px;
     }
     
     .videoContainer {
@@ -1572,7 +1602,7 @@ main {
             border-top: solid 1px white;
 
             .title {
-              width: 400px;
+              // width: 400px;
               margin: 10px 20px;
             }
             .createdDate {

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
 import axios from 'axios'
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 
 function Main(props){
 
@@ -89,6 +89,10 @@ function MovieLists(props) {
         setScrolled(0);
       }
     }
+    
+    const TagClick = (tagId) => {
+      navigate(`/tagDetail/${tagId}`);
+    }
 
   return(
     <div>
@@ -111,18 +115,22 @@ function MovieLists(props) {
           :
           <div>Loading...</div>
         }
-
-          {
-            scrolled === 3 ?
-            null:
-          <button className="nextBtn" onClick={() => {
-            ref.current.scrollBy({left:500, behavior:'smooth'})
-          }}>▶</button>
-          
-          }
+          </ul>
         </ul>
-        
-      </ul>
+      </div>
+    );
+}
+
+function Tag(props) {
+  const navigate = useNavigate();
+  const TagClick = () => {
+    navigate('/tagDetail/{props.tag.id}');
+  }
+
+  return (
+    <div className='tag'>
+      <img src={process.env.PUBLIC_URL + props.tag.tagIcon} className='tagIcon' onClick={TagClick} />
+      <div className='tagName'>{props.tag.tagName.replace('학교','')}</div>
     </div>
   )
 }
@@ -138,7 +146,8 @@ function ReducedTag(props) {
 
 function TagMovies(props) {
   const navigate = useNavigate();
-  return(
+
+  return (
     <>
     {
     props.movies.map((movie) => {
@@ -157,12 +166,11 @@ function TagMovies(props) {
               </button>
             </div>
           </div>
-        </li>
-      )
-    })
-  }
-  </>
-  )
+          </li>
+        );
+      })}
+    </>
+  );
 }
 
 function DetailModal(props) {

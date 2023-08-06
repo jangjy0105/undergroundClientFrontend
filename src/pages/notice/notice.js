@@ -40,6 +40,8 @@ function NoticeList(props) {
     if (props.currPage !== 1) props.setCurrPage(props.currPage-1);
   }
 
+  
+
   return (
     <div className="noticeList">
       <div className="listBox">
@@ -76,6 +78,7 @@ function NoticeList(props) {
     </div>  
   )
 }
+
 
 function NoticeDetail(props) {
   
