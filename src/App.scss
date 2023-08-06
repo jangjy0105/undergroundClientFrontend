@@ -9,18 +9,18 @@ button {
 }
 
 body::-webkit-scrollbar {
-  width: 8px;  /* 스크롤바의 너비 */
+  width: 6px;  /* 스크롤바의 너비 */
 }
 
 body::-webkit-scrollbar-thumb {
-  height: 30%; /* 스크롤바의 길이 */
-  background: #9999997d; /* 스크롤바의 색상 */
+  height: 10%; /* 스크롤바의 길이 */
+  background: rgba(255, 255, 255, 0.3); /*스크롤바의 색상 */
 
   border-radius: 10px;
 }
 
 body::-webkit-scrollbar-track {
-  background: rgba(33, 122, 244, .1);  /* 스크롤바 뒷 배경 색상*/
+  background: rgba(0, 0, 0, 1);  /*스크롤바 뒷 배경 색상*/
 }
 
 .App {
@@ -1125,35 +1125,24 @@ main {
 
     .playerdetail {
       padding-top: 60px;
-      padding-left: 250px;
-      padding-right:250px;
+      padding-left: 300px;
+      padding-right: 300px;
       height: 1000px;
-     
-      .playermain{
+      display: flex;
+      flex-direction: row;
+
+      .leftInfo {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        flex: 1;
+        margin-right: 300px;
       }
 
-      .custom-textarea {
-        resize:none;
-        background-color: #404040;
-        color:white;
+      .righInfo {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
       }
-
-      .custom-button{
-        background-color :#404040;
-        color: white;
-      }
-      
-    }
-    .tagmain {
-      color: white;
-      margin-top: 1000px;
-    }
-
-    .tagId{
-      margin-top: 100px;
     }
     
     .videoContainer {

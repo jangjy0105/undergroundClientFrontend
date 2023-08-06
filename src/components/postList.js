@@ -9,6 +9,7 @@ function PostList(props) {
   
   const pages = [];
   const [currPage, setCurrPage] = useState(1);
+  const [sortOption, setSortOption] = useState(null);
 
   for(let i=0; i<totalPage; i++) { pages[i] = i+1; }
 
@@ -58,9 +59,9 @@ function PostList(props) {
               </li>
             )
           })
-          :null
+          :null  
         }
-      </ul>
+        </ul>
     </div>
     <div className="pages">
         <button onClick={() => {setCurrPage(1)}}>{'<<'}</button>

@@ -75,6 +75,8 @@ function NoticeList(props) {
         <button onClick={nextPage}>{'>'}</button>
         <button onClick={() => {props.setCurrPage(pages[pages.length-1])}}>{'>>'}</button>
       </div>
+
+      <List data={notices} pages={pages} currPage={props.currPage} setCurrPage={props.setCurrPage} />
     </div>  
   )
 }
