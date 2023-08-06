@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { useNavigate, useParams } from "react-router-dom";
+import movieData from "../../movieData";
+import Comment from "../../components/Comment";
 
 function Player(){
   
@@ -11,7 +13,12 @@ function Player(){
   const videoRef = useRef();
   
   const playerRef = useRef();
-  
+
+  const { id } = useParams();
+  const movieTitle = movieData.map(movie => movie.title);
+  const movieSummary = movieData.map(movie => movie.summary);
+  const movieInfo = movieData.map(movie => movie.Info);
+
   const [playerState, setPlayerState] = useState({
     playing: false,     // 재생중인지
     muted: false,      // 음소거인지
@@ -209,6 +216,32 @@ function Player(){
       document.removeEventListener('fullscreenchange', changeFullScreen);
     }
   },[playerState]);
+  
+  const [count, setCount] = useState(0);
+  
+  useEffect(() => {
+    increaseCount();
+  }, []);
+
+  const increaseCount = () => {
+    setCount(count + 1);
+  };
+
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState({ username: '', content: '' });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setNewComment({ ...newComment, [name]: value });
+  };
+
+  const handleAddComment = () => {
+    if (newComment.username.trim() === '' || newComment.content.trim() === '') {
+      return;
+    }
+  setComments([...comments, newComment]);
+  setNewComment({ username: '', content: '' });
+  };
 
   return(
     <div className="player">
@@ -361,8 +394,25 @@ function Player(){
         }
       </div>
 
-      <div className="qwer">
-        댓글들..
+      <div className="playerdetail">
+        <div className="leftInfo">
+          <h2>{movieTitle[id]}
+            <img src = "/assets/paid.svg" />
+          </h2>
+          <h4 className='summary'>{movieSummary[id]}</h4>
+          <br></br>
+          <h4>{movieInfo[id]}</h4>
+
+          <div>
+            <Comment />
+          </div>
+
+        </div>
+
+        <div className='rightInfo'>
+            <div className='runningTime'>총 : 101분</div>
+            <div className='hits'>총 조회수: {count}</div>
+        </div>
       </div>
     </div>
   )

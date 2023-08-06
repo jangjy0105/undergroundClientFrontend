@@ -30,16 +30,7 @@ function App() {
   const [detailModal, setDetailModal] = useState(-1);
   const [scrollY, setScrollY] = useState(0);
   
-  useEffect(() => {
-    console.log('hi')
-    let timer = setTimeout(() => {
-      document.body.classList.remove('showScrollbar')
-    },1000);
-    return () => {
-      document.body.classList.add('showScrollbar')
-      clearTimeout(timer);
-    }; 
-  },[scrollY])
+
   
   useEffect(() => {
     const escKey = (e) => {
@@ -52,19 +43,11 @@ function App() {
         }
       }
     };
-    let timer;
-    const scrollEvent = (e) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        setScrollY(window.pageYOffset);
-      }, 10);
-    };
     
     window.addEventListener("keyup", escKey);
-    window.addEventListener('scroll', scrollEvent);
     return () => {
       window.removeEventListener("keyup", escKey);
-      window.removeEventListener('scroll', scrollEvent);
+
       
     }
   },[menuModal, searchModal, loginModal, detailModal])

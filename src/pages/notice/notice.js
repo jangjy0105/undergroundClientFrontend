@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import noticeData from "../../noticeData"
+import List from "../../components/list";
 
 function Notice() {
   const data = noticeData.sort((a, b) => b.no - a.no);
@@ -71,6 +72,8 @@ function NoticeList(props) {
         <button onClick={nextPage}>{'>'}</button>
         <button onClick={() => {props.setCurrPage(pages[pages.length-1])}}>{'>>'}</button>
       </div>
+
+      <List data={notices} pages={pages} currPage={props.currPage} setCurrPage={props.setCurrPage} />
     </div>  
   )
 }

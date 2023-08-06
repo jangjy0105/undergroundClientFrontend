@@ -8,28 +8,19 @@ button {
   cursor: pointer;
 }
 
-body {
-  overflow: overlay;
-}
-
 body::-webkit-scrollbar {
-  width: 0;
-  background: transparent;
+  width: 6px;  /* 스크롤바의 너비 */
 }
 
-.showScrollbar::-webkit-scrollbar-thumb {
-  height: 5%; /* 스크롤바의 길이 */
-  background: rgba(255, 255, 255, 0.5); /* 스크롤바의 색상 */
-  
+body::-webkit-scrollbar-thumb {
+  height: 10%; /* 스크롤바의 길이 */
+  background: rgba(255, 255, 255, 0.3); /*스크롤바의 색상 */
+
   border-radius: 10px;
 }
-.showScrollbar::-webkit-scrollbar-track {
-  background: transparent;  /*스크롤바 뒷 배경 색상*/
-}
 
-.showScrollbar::-webkit-scrollbar {
-  width: 8px;  /* 스크롤바의 너비 */
-  height: 30px;
+body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 1);  /*스크롤바 뒷 배경 색상*/
 }
 
 .App {
@@ -1132,8 +1123,26 @@ main {
 
   .player {
 
-    .qwer {
+    .playerdetail {
+      padding-top: 60px;
+      padding-left: 300px;
+      padding-right: 300px;
       height: 1000px;
+      display: flex;
+      flex-direction: row;
+
+      .leftInfo {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin-right: 300px;
+      }
+
+      .righInfo {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
     }
     
     .videoContainer {
