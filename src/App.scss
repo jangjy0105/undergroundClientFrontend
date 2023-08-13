@@ -181,15 +181,20 @@ header { // 시멘틱태그 공부
   
   .logo {
     position: absolute;
-    left: 60px;;
+    left: 60px;
     top: 10px;
     background-color: rgba(0, 0, 0, 0);
     border: none;
     .logoIcon {
-      width: 100px;
+      @include desktop {
+        width: 100px;
+      }
+      @include tablet {
+        width: 60px;
+      } 
       @include mobile {
         width: 40px;
-      } 
+      }
     }
   }
   
@@ -538,20 +543,21 @@ main {
     }
     @include desktop{
       .hero {
+        position: relative;
         .heroImg {
-          width: 100vw;
+          width: 100%;
           height: 800px;
         }
         .heroBtn {
           position: absolute;
-          bottom: 30%;
-          right: 20%;
+          bottom: 22%;
+          right: 12.1%;
           background-color: #fff;
           color: #000;
-          width: 250px;
-          height: 50px;
+          width: 277px;
+          height: 80px;
           border: none;
-          border-radius: 30px;
+          border-radius: 25px;
           font-size: x-large;
           font-weight: 900;
         }
@@ -570,14 +576,14 @@ main {
   
         .heroBtn {
           position: absolute;
-          bottom: 15%;
-          right: 15%;
+          bottom: 22%;
+          right: 12.3%;
           background-color: #fff;
           color: #000;
-          width: 150px;
-          height: 40px;
+          width: 175px;
+          height: 54px;
           border: none;
-          border-radius: 30px;
+          border-radius: 25px;
           font-size: larger;
           font-weight: 700;
         }
@@ -590,7 +596,7 @@ main {
 
         .heroImg{
           width: 100%;
-          height: 97.2vw;
+          height: 50vw;
         }
         .heroBtn {
           position: absolute;
