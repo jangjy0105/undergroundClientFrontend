@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import formatDatetime from "../functions/parseDate";
 
 function PostList(props) {
 
@@ -55,7 +56,7 @@ function PostList(props) {
               <li>
                 {/* <span className="no">{data.no}</span> */}
                 <span className="title">{data[props.elements.title]}</span>
-                <span className="createdDate">{data[props.elements.createdDate]}</span>
+                <span className="createdDate">{formatDatetime(data[props.elements.createdDate])}</span>
               </li>
             )
           })
