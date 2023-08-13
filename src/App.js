@@ -17,6 +17,7 @@ import RequestMovie from "./pages/requestMovie/requestMovie"
 import ScrollToTop from './components/scrollToTop';
 import Notice from "./pages/notice/notice"
 import Back from "./components/back"
+import axios from "axios"
 import TagDetail from './tagDetail.js';
 
 function App() {
@@ -43,20 +44,10 @@ function App() {
         }
       }
     };
-    let timer;
-    const scrollEvent = (e) => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        setScrollY(window.pageYOffset);
-      }, 10);
-    };
-    
+
     window.addEventListener("keyup", escKey);
-    
     return () => {
       window.removeEventListener("keyup", escKey);
-      
-      
     }
   },[menuModal, searchModal, loginModal, detailModal])
 

@@ -4,11 +4,7 @@ let movieData = [
     title : "아무도 없는 곳",
     posterImg : "/assets/posterImg1.svg",
     open :  true,
-    summary : "어느 이른 봄, 7년 만에 서울로 돌아온 소설가 ‘창석’이 우연히 만나고 헤어진 여기, 길 잃은 마음의 이야기",
-    date : "개봉일 : " ,
-    direct : "감독 : ",
-    scirpt : "각본 : ",
-    act : "출연진 : ", 
+    summary : "어느 이른 봄, 7년 만에 서울로 돌아온 소설가 ‘창석’이 우연히 만나고 헤어진 여기, 길 잃은 마음의 이야기", 
   },
   {
     id : 1,
