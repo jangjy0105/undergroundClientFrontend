@@ -1,24 +1,33 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { useNavigate, useParams } from "react-router-dom";
 import movieData from "../../movieData";
-import WrapComments from "../../components/wrapcomment";
+import CommentApp from "../../components/comment";
 
 function Player(){
-  
+
   const navigate = useNavigate();
+
+  const { id } = useParams();
+  const movieTitle = movieData.map(movie => movie.title);
+  const movieSummary = movieData.map(movie => movie.summary);
+  const movieDate = movieData.map(movie => movie.date);
+  const movieDirect = movieData.map(movie => movie.direct);
+  const movieScript = movieData.map(movie => movie.scirpt);
+  const movieAct = movieData.map(movie => movie.act);
+
+  const score = 88;
+  const scoreInt = parseInt(score/20);
+  const scoreDec = ((score%20)/20)*14 + "px";
+
+  const stars = [1,2,3,4,5];
 
   const movieNum = useParams().id%2;
 
   const videoRef = useRef();
   
   const playerRef = useRef();
-
-  const { id } = useParams();
-  const movieTitle = movieData.map(movie => movie.title);
-  const movieSummary = movieData.map(movie => movie.summary);
-  const movieInfo = movieData.map(movie => movie.Info);
-
+  
   const [playerState, setPlayerState] = useState({
     playing: false,     // 재생중인지
     muted: false,      // 음소거인지
@@ -185,7 +194,6 @@ function Player(){
     };
   },[hiding])
 
-
   useEffect(() => {
     const keyEvent = (e) => {
       if (e.keyCode === 32) playPause();
@@ -216,32 +224,8 @@ function Player(){
       document.removeEventListener('fullscreenchange', changeFullScreen);
     }
   },[playerState]);
-  
-  const [count, setCount] = useState(0);
-  
-  useEffect(() => {
-    increaseCount();
-  }, []);
 
-  const increaseCount = () => {
-    setCount(count + 1);
-  };
 
-  const [comments, setComments] = useState([]);
-  const [newComment, setNewComment] = useState({ username: '', content: '' });
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setNewComment({ ...newComment, [name]: value });
-  };
-
-  const handleAddComment = () => {
-    if (newComment.username.trim() === '' || newComment.content.trim() === '') {
-      return;
-    }
-  setComments([...comments, newComment]);
-  setNewComment({ username: '', content: '' });
-  };
 
   return(
     <div className="player">
@@ -395,24 +379,47 @@ function Player(){
       </div>
 
       <div className="playerdetail">
-        <div className="leftInfo">
-          <h2>{movieTitle[id]}
-            <img src = "/assets/paid.svg" />
-          </h2>
-          <h4 className='summary'>{movieSummary[id]}</h4>
-          <br></br>
-          <h4>{movieInfo[id]}</h4>
-
-          <div>
-            <WrapComments />
+        <div className="playermain">
+          <div className="leftInfo">
+            <h2>
+              {movieTitle[id]}
+              <img src = "/assets/paid.svg"/>
+            </h2>
+            
           </div>
-
+          <div className="rightInfo">
+              <div className='playerFillScore'>
+                {
+                  stars.map((star) => {
+                    if (star <= scoreInt) return(<span className='playerContainer'><span className='playerStar'>★</span></span>)
+                  })
+                }
+                  <span className='playerContainer' style={{width: scoreDec, overflow: "hidden"}}>
+                    <span className='playerStar'>★</span>
+                  </span>
+                </div>
+              <div className='playerBaseScore'>
+                {
+                  stars.map((star) => {
+                    return(<span className='playerContainer'><span className='playerStar'>★</span></span>)
+                  })
+                  }
+              </div>
+            <div className="runningTime">총 : 101분</div>
+            <div className="hits">조회수 : 854회</div>
+          </div>
         </div>
-
-        <div className='rightInfo'>
-            <div className='runningTime'>총 : 101분</div>
-            <div className='hits'>총 조회수: {count}</div>
-        </div>
+        <h4 className="summary">
+          {movieSummary[id]}
+        </h4>
+        <br/>
+        <h4 className="date" /> {movieDate[id]}
+        <h4 className="direct" /> {movieDirect[id]}
+        <h4 className="script" /> {movieScript[id]}
+        <h4 className="Act" /> {movieAct[id]}
+        <br/>
+        <br/>
+        <CommentApp />
       </div>
     </div>
   )
