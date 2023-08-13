@@ -1125,6 +1125,18 @@ main {
     }
   }
 
+  .tagmain {
+    color: white(228, 20, 20);
+    
+    .tagId{ 
+      color: red($color: #000000);
+      margin: auto;
+      text-align: center;
+
+    }
+  }
+
+
   .player {
 
     .playerdetail {
@@ -1150,14 +1162,6 @@ main {
         color: white;
       }
       
-    }
-    .tagmain {
-      color: white;
-      margin-top: 1000px;
-    }
-
-    .tagId{
-      margin-top: 100px;
     }
     
     .videoContainer {
