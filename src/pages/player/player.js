@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { useNavigate, useParams } from "react-router-dom";
 import movieData from "../../movieData";
-import CommentApp from "../../components/comment";
+
 
 function Player(){
 
@@ -419,7 +419,6 @@ function Player(){
         <h4 className="Act" /> {movieAct[id]}
         <br/>
         <br/>
-        <CommentApp />
       </div>
     </div>
   )
