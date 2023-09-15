@@ -10,12 +10,12 @@ function Player(){
   const { id } = useParams();
   const movieTitle = movieData.map(movie => movie.title);
   const movieSummary = movieData.map(movie => movie.summary);
-  const movieDate = movieData.map(movie => movie.date);
-  const movieDirect = movieData.map(movie => movie.direct);
-  const movieScript = movieData.map(movie => movie.scirpt);
-  const movieAct = movieData.map(movie => movie.act);
+  const movieReleaseDate = movieData.map(movie => movie.releaseDate);
+  const movieDirect = movieData.map(movie => movie.director);
+  const movieScreenplay = movieData.map(movie => movie.screenplay);
+  const movieCast = movieData.map(movie => movie.cast);
 
-  const score = 88;
+  const score = 97.5;
   const scoreInt = parseInt(score/20);
   const scoreDec = ((score%20)/20)*14 + "px";
 
@@ -224,7 +224,13 @@ function Player(){
     }
   },[playerState]);
 
+  const [liked, setLiked] = useState(false);
+  
+  const toggleLike = () => {
+    setLiked(prevLiked => !prevLiked);
+  };
 
+  const [isMore, setIsMore] = useState(false);
 
   return(
     <div className="player">
@@ -267,11 +273,34 @@ function Player(){
             <div>
               <div className="modalOut" onClick={closeReportModal}/>
               <div className="reportModal">
-                <div className="reportComment">어떤 문제를 겪고 게신가요?</div>
-                <button>버퍼링 및 로딩</button>
-                <button>자막 및 캡션</button>
-                <button>음성 및 영상</button>
-                <button>다른 문제</button>
+                <div className="reportComment">
+                  <div className="comment"> 어떤 문제를 겪고 게신가요? </div>
+                  <button className="xBtn"><img src="/assets/xBtn.png" /></button>
+                </div>
+                <div className="BaL">
+                  <button>
+                    <div className="title">버퍼링 및 로딩</div>
+                    <div className="detail">영상이 흐리거나, 로딩이 지연되거나, 로딩이 되지 않습니다.</div>
+                  </button>
+                </div>
+                <div className="SaC">
+                  <button>
+                    <div className="title">자막 및 캡션</div>
+                    <div className="detail">자막이나 캡션이 제대로 작동하지 않습니다.</div>
+                  </button>
+                </div>
+                <div className="VaV">
+                  <button>
+                    <div className="title">음성 및 음악</div>
+                    <div className="detail">영상의 소리가 잘 안들리거나 영상이 잘 보이지 않습니다.</div>
+                  </button>
+                </div>
+                <div className="etc">
+                  <button>
+                    <div className="title">다른 문제</div>
+                    <div className="detail">작품에 다른 문제가 있습니다.</div>
+                  </button>
+                </div>
               </div>
             </div>
             :null
@@ -379,45 +408,84 @@ function Player(){
 
       <div className="playerdetail">
         <div className="playermain">
-          <div className="leftInfo">
-            <h2>
-              {movieTitle[id]}
-              <img src = "/assets/paid.svg"/>
-            </h2>
-            
-          </div>
-          <div className="rightInfo">
-              <div className='playerFillScore'>
-                {
-                  stars.map((star) => {
-                    if (star <= scoreInt) return(<span className='playerContainer'><span className='playerStar'>★</span></span>)
-                  })
-                }
-                  <span className='playerContainer' style={{width: scoreDec, overflow: "hidden"}}>
-                    <span className='playerStar'>★</span>
-                  </span>
-                </div>
-              <div className='playerBaseScore'>
-                {
-                  stars.map((star) => {
-                    return(<span className='playerContainer'><span className='playerStar'>★</span></span>)
-                  })
-                  }
+          <div className="playertitle">
+            <div className="leftInfo">
+              <div className="title">{movieTitle[id]} </div>
+              <div className="laurel">
+              <img className="paidservices" src="/assets/paidservices.png" />
               </div>
-            <div className="runningTime">총 : 101분</div>
-            <div className="hits">조회수 : 854회</div>
+            </div>
+            <div className="space"></div>
+            <div className="rightInfo">
+              <img className={liked ? "redLike" : "like"}
+              src={liked ? "/assets/redLike.png" : "/assets/like.png"}
+              alt="Like Button"
+              onClick={toggleLike} />
+              <img className="report2" src="/assets/report2.png" />
+            </div>         
+          </div>
+          <div className="plot">
+            <div className="smallplot">
+              <div className="summary"> {movieSummary[id]} </div>
+            </div>
+            <div className="starunninghits">
+                <div className='playerFillScore'>
+                  {
+                    stars.map((star) => {
+                      if (star <= scoreInt) return(<span className='playerContainer'><img className= "playerStar" src="/assets/star.png" /></span>)
+                    })
+                  }
+                    <span className='playerContainer' style={{width: scoreDec, overflow: "hidden"}}>
+                    <img className= "playerStar" src="/assets/star.png" />
+                    </span>
+                </div>
+                <div className="runninghits">
+                  <div className="runningtime">총 : 1시간 56분</div>
+                  <div className="hits">조회 수 : 8만회</div>
+                </div>
+            </div>
+          </div>
+          <div className="moreInfo">
+              <div className="date"> 개봉일 : {movieReleaseDate[id]} </div>
+              <div className="direct"> 감독 : {movieDirect[id]} </div>
+              <div className="screenpaly">각본 : {movieScreenplay[id]} </div>
+              <div className="cast">
+                <div>
+                  {isMore ? (
+                    // 전부 보여주는 코드
+                    <div className="fullContent">{<div className="showCast">출연진 : {movieCast[id]} </div>}</div>
+                  ) : (
+                    // 간략히 보여주는 코드
+                    <div className="summaryContent">{<div className="hideCast">출연진 : {movieCast[id]} </div>}</div>
+                  )}
+                </div>
+                <div>
+                  {isMore ? (
+                      // 닫기 버튼
+                      <div className="more">
+                        <div className="moreContent" onClick={() => setIsMore(!isMore)}>닫기</div>
+                        <button className="arrow-button" onClick={() => setIsMore(!isMore)}>
+                          <img className="arrow" src="/assets/Arrow.png" />
+                        </button>
+                      </div>
+                  ) : (
+                      // 더보기 버튼
+                      <div className="more">
+                        <div className="moreContent" onClick={() => setIsMore(!isMore)}>더보기</div>
+                        <button className="arrow-button" onClick={() => setIsMore(!isMore)}>
+                          <img className="arrow" src="/assets/Arrow.png" />
+                        </button>
+                      </div>
+                  )}
+                </div>
+              </div>
           </div>
         </div>
-        <h4 className="summary">
-          {movieSummary[id]}
-        </h4>
-        <br/>
-        <h4 className="date" /> {movieDate[id]}
-        <h4 className="direct" /> {movieDirect[id]}
-        <h4 className="script" /> {movieScript[id]}
-        <h4 className="Act" /> {movieAct[id]}
-        <br/>
-        <br/>
+        <div className="videoContent">
+          <div className="likeContent">
+            <div className="title">내가 찜한 콘텐츠</div>
+          </div>
+        </div>
       </div>
     </div>
   )
