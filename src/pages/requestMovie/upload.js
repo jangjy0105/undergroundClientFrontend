@@ -4,10 +4,10 @@ import Inputs from "../../components/inputs"
 function Upload() {
 
   const [inputs, setInputs] = useState({
-    video: {name: '영화 동영상', isPlural: false, isInput: true, type: 'file', addDataName: 'video', inputValue: ''},
-    poster: {name: '영화 포스터', isPlural: false, isInput: true, type: 'file', addDataName: 'poster', inputValue: ''},
+    video: {name: '동영상(MP4)', isPlural: false, isInput: true, type: 'file', addDataName: 'video', inputValue: ''},
+    poster: {name: '영화 포스터(썸네일)', isPlural: false, isInput: true, type: 'file', addDataName: 'poster', inputValue: ''},
     subtitle: {name: '자막', isPlural: false, isInput: true, type: 'file', addDataName: 'subtitle', inputValue: ''},
-    title: {name: '제목', isPlural: false, isInput: true, type: 'default', addDataName: 'title', inputValue: ''},
+    title: {name: '영화 제목', isPlural: false, isInput: true, type: 'default', addDataName: 'title', inputValue: ''},
     summary: {name: '줄거리', isPlural: false, isInput: false, type: 'textarea', addDataName: 'summary', inputValue: ''},
     directors: {name: '감독', isPlural: true, isInput: true, type: 'default', addDataName: 'directors', inputValue: ''},
     scenarios: {name: '각본', isPlural: true, isInput: true, type: 'default', addDataName: 'scenarios', inputValue: ''},

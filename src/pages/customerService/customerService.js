@@ -4,6 +4,7 @@ import inquiryData from "../../inquiryData";
 import FAQ from "./faq";
 import InquiryDetail from "./inquiryDetail";
 import Inquiry from "./inquiry";
+import InquiryPost from "../../inquiryPost";
 
 function CustomerService(){
   
@@ -12,6 +13,7 @@ function CustomerService(){
     <Routes>
       <Route path="/" element={<FAQ />} />
       <Route path={"/inquiry/*"} element={<Inquiry />} />
+      {/* <Route path={"/inquiryPost/*"} element={<InquiryPost />} /> */}
     </Routes>
     </div>
   )

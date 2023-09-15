@@ -4,21 +4,23 @@ let movieData = [
     title : "아무도 없는 곳",
     posterImg : "/assets/posterImg1.svg",
     open :  true,
-    summary : "어느 이른 봄, 7년 만에 서울로 돌아온 소설가 ‘창석’이 우연히 만나고 헤어진 여기, 길 잃은 마음의 이야기", 
+    summary : "어느 이른 봄, 7년 만에 서울로 돌아온 소설가 ‘창석’이 우연히 만나고 헤어진 여기, 길 잃은 마음의 이야기",
+    direct : "최재윤" 
   },
   {
     id : 1,
     title : "꿈의 제인",
     posterImg : "/assets/posterImg2.svg",
     open :  true,
-    summary : "",
+    summary : "어느 날, 꿈결처럼 미스터리한 여인 '제인'이 나타나고, 그날 이후 소현은 조금씩 ‘제인’과의 시시한 행복을 꿈꾸기 시작한다.",
+    direct : "조현훈"
   },
   {
     id : 2,
     title : "어른들은 몰라요",
     posterImg : "/assets/posterImg3.svg",
     open :  true,
-    summary : "",
+    summary : "“우리도 살아야 되잖아요.” 어른들은 모르는 가장 솔직한 10대들의 이야기",
   },
   {
     id : 3,

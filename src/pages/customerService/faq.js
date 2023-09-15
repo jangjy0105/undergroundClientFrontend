@@ -2,6 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FAQData from "../../FAQData";
 
+const categoryIconGroups = {
+  계정: "account-icon",
+  결제: "payment-icon",
+  '영화 등록 문의': "movie-icon",
+  오류: "error-icon",
+};
+
 function FAQ() {
   const FAQ = [];
   const FAQCategorys = ['계정', '결제', '영화 등록 문의', '오류'];
@@ -23,7 +30,13 @@ function FAQ() {
             FAQCategorys.map((category, idx) => {
               return(
                 <div>
-                  <button className="categoryBtn" onClick={() => {setSelectedCategory(selectedCategory===idx ? -1 : idx)}}>{category}</button>
+                  <button className="categoryBtn" onClick={() => {setSelectedCategory(selectedCategory===idx ? -1 : idx)}}>
+                    {category}
+                    <img
+                    src={`\assets\open.png`}
+                    className="categoryIcon"
+                  />
+                  </button>
                   {
                     selectedCategory === idx ? 
                     FAQ[idx].map((FAQ) => {
