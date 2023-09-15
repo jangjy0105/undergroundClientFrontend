@@ -1,3 +1,4 @@
+import { colors } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 // import '../App.scss'
 
@@ -15,7 +16,6 @@ function Search(props) {
   return (
     <div className="search">
       <h1 className="searchWord">"{searchWord}"</h1>
-
       {
         searchedMovies.length === 0 ?
         <h2 className="comment">"{searchWord}"에 해당하는 영화가 없습니다...</h2>:
@@ -32,9 +32,13 @@ function Search(props) {
               </div>
               <div className="searchedMovieInfo">
                 <div className="movieTitle">{searchedMovie.title}</div>
-                <div className='summary'>CHECK THIS OUT 나는 정 상 수백발백중 하는 명 사 수부산진구 유명가수일취월장 하며 성장 중내가 대표해 이 거리를누구도 막지 못해 내 지껄임을사양할게 너의 벌쓰 피처링은이건 나의 TRACK MY SWAG노린 RAP ATTACK난 계속해서 매섭게 쏘겠어죄 속에서 날 대속해 주신 주</div>
+                <div className='summary'>{searchedMovie.summary}</div>
+                <div className="moreInfo">
+                  {searchedMovie.releaseDate}
+                  <div className="views">조회수 : <div style={{color : 'white'}}>882</div> 회</div>
+                  <div className="likes">조회수 : <div style={{color : 'white'}}>56</div> 개</div>
+                </div>
               </div>   
-            
             </div>
           )
         })
