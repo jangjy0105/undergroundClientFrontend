@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 function LoginModal(props) {
   const [loginId, setLoginId] = useState('');
@@ -7,6 +8,13 @@ function LoginModal(props) {
   const [warnning, setWarnning] = useState(false);
   const [findMode, setFindMode] = useState(false);
   const navigate = useNavigate();
+  const login = () => {
+    axios.post('http://34.64.176.187:8090/member/signin', {mem_id: loginId, mem_pass: loginPw}, {"Content-Type": 'application/json'})
+    .then((res) => {
+      console.log(res.data)
+    })
+    .catch((err) => {console.log(err)})
+  }
 
   return (
     <div>
@@ -55,7 +63,7 @@ function LoginModal(props) {
             <input type="checkbox" className="checkbox"></input>
             <span> 아이디 저장</span>
           </div>
-          <button className="loginBtn" onClick={() => {setWarnning(!warnning)}}>로그인</button>
+          <button className="loginBtn" onClick={login}>로그인</button>
           <button className="findBtn" onClick={() => {setFindMode(true)}}>아이디 / 비밀번호 찾기</button>
           <div className="RUMember">
             <span>아직 회원이 아니신가요?</span>
