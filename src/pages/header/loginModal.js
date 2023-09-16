@@ -132,7 +132,7 @@ function LoginModal(props) {
             <input type="checkbox" className="checkbox"></input>
             <span> 아이디 저장</span>
           </div>
-          <button className="loginBtn" onClick={() => {setWarnning(true)}}>로그인</button>
+          <button className="loginBtn" onClick={login}>로그인</button>
           <button className="findBtn" onClick={() => {setFindMode(true)}}>아이디 / 비밀번호 찾기</button>
           <div className="RUMember">
             <span>아직 회원이 아니신가요?</span>
