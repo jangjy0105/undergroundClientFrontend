@@ -2,18 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { useNavigate, useParams } from "react-router-dom";
 import movieData from "../../movieData";
+import axios from 'axios'
 
 function Player(){
 
   const navigate = useNavigate();
 
+  const [detailModal, setDetailModal] = useState(-1);
+
   const { id } = useParams();
-  const movieTitle = movieData.map(movie => movie.title);
-  const movieSummary = movieData.map(movie => movie.summary);
-  const movieReleaseDate = movieData.map(movie => movie.releaseDate);
-  const movieDirect = movieData.map(movie => movie.director);
-  const movieScreenplay = movieData.map(movie => movie.screenplay);
-  const movieCast = movieData.map(movie => movie.cast);
+  const movieTitle = movieData.map(movie => movie.title);     //제목
+  const movieSummary = movieData.map(movie => movie.summary); //줄거리
+  const movieDate = movieData.map(movie => movie.date);       //날짜
+  const movieDirect = movieData.map(movie => movie.direct);   //감독?
+  const movieScript = movieData.map(movie => movie.scirpt);   //각본
+  const movieAct = movieData.map(movie => movie.act);         //배우
 
   const score = 97.5;
   const scoreInt = parseInt(score/20);
@@ -274,32 +277,32 @@ function Player(){
               <div className="modalOut" onClick={closeReportModal}/>
               <div className="reportModal">
                 <div className="reportComment">
-                  <div className="comment"> 어떤 문제를 겪고 게신가요? </div>
-                  <button className="xBtn"><img src="/assets/xBtn.png" /></button>
-                </div>
-                <div className="BaL">
-                  <button>
-                    <div className="title">버퍼링 및 로딩</div>
-                    <div className="detail">영상이 흐리거나, 로딩이 지연되거나, 로딩이 되지 않습니다.</div>
+                  어떤 문제를 겪고 계신가요?
+                  <button className="reportCloseBtn" onClick={() => {}}>
+                    <img className="closeBtnIcon" src={process.env.PUBLIC_URL + '/assets/exitIcon.svg'} />
                   </button>
                 </div>
-                <div className="SaC">
-                  <button>
-                    <div className="title">자막 및 캡션</div>
-                    <div className="detail">자막이나 캡션이 제대로 작동하지 않습니다.</div>
+                <div className="reportAnswer">
+                <div className="buffering">
+                  <button className="reportPhoto" >
+                    <img src = "/assets/changeIcon.svg"/>버퍼링 및 로딩
                   </button>
+                  <div className="caption">영상이 흐리거나, 로딩이 지연되거나, 로딩이 되지 않습니다.</div>
                 </div>
-                <div className="VaV">
+                <div className="subTitles">
                   <button>
-                    <div className="title">음성 및 음악</div>
-                    <div className="detail">영상의 소리가 잘 안들리거나 영상이 잘 보이지 않습니다.</div>
+                    <img src = "/assets/captionIcon.svg"/>자막 및 캡션
                   </button>
+                  <div className="caption">자막이나 캡션이 제대로 작동하지 않습니다.</div>
                 </div>
-                <div className="etc">
-                  <button>
-                    <div className="title">다른 문제</div>
-                    <div className="detail">작품에 다른 문제가 있습니다.</div>
-                  </button>
+                <button>
+                  음성 및 영상
+                </button>
+                <div className="caption">영상의 소리가 잘 안들리거나 영상이 잘 보이지 않습니다.</div>
+                <button>
+                  다른 문제  
+                </button>
+                <div className="caption">작품에 다른 문제가 있습니다.</div>
                 </div>
               </div>
             </div>
@@ -408,83 +411,113 @@ function Player(){
 
       <div className="playerdetail">
         <div className="playermain">
-          <div className="playertitle">
-            <div className="leftInfo">
-              <div className="title">{movieTitle[id]} </div>
-              <div className="laurel">
-              <img className="paidservices" src="/assets/paidservices.png" />
-              </div>
-            </div>
-            <div className="space"></div>
-            <div className="rightInfo">
-              <img className={liked ? "redLike" : "like"}
-              src={liked ? "/assets/redLike.png" : "/assets/like.png"}
-              alt="Like Button"
-              onClick={toggleLike} />
-              <img className="report2" src="/assets/report2.png" />
-            </div>         
+          <div className="leftInfo">
+            <h1 className="movieTitle">
+              {movieTitle[id]}
+              <img className="payment" src = "/assets/월계수.svg"/>
+            </h1>
+            
           </div>
-          <div className="plot">
-            <div className="smallplot">
-              <div className="summary"> {movieSummary[id]} </div>
-            </div>
-            <div className="starunninghits">
-                <div className='playerFillScore'>
-                  {
-                    stars.map((star) => {
-                      if (star <= scoreInt) return(<span className='playerContainer'><img className= "playerStar" src="/assets/star.png" /></span>)
-                    })
-                  }
-                    <span className='playerContainer' style={{width: scoreDec, overflow: "hidden"}}>
-                    <img className= "playerStar" src="/assets/star.png" />
-                    </span>
+          
+          <div className="rightInfo">
+              <div className='playerFillScore'>
+                {/* {
+                  stars.map((별) => {
+                    if (star <= scoreInt) return(<span className='playerContainer'><span className='playerStar'>★</span></span>)
+                  })
+                }
+                  <span className='playerContainer' style={{width: scoreDec, overflow: "hidden"}}>
+                    <span className='playerStar'>★</span>
+                  </span>
                 </div>
-                <div className="runninghits">
-                  <div className="runningtime">총 : 1시간 56분</div>
-                  <div className="hits">조회 수 : 8만회</div>
-                </div>
-            </div>
-          </div>
-          <div className="moreInfo">
-              <div className="date"> 개봉일 : {movieReleaseDate[id]} </div>
-              <div className="direct"> 감독 : {movieDirect[id]} </div>
-              <div className="screenpaly">각본 : {movieScreenplay[id]} </div>
-              <div className="cast">
-                <div>
-                  {isMore ? (
-                    // 전부 보여주는 코드
-                    <div className="fullContent">{<div className="showCast">출연진 : {movieCast[id]} </div>}</div>
-                  ) : (
-                    // 간략히 보여주는 코드
-                    <div className="summaryContent">{<div className="hideCast">출연진 : {movieCast[id]} </div>}</div>
-                  )}
-                </div>
-                <div>
-                  {isMore ? (
-                      // 닫기 버튼
-                      <div className="more">
-                        <div className="moreContent" onClick={() => setIsMore(!isMore)}>닫기</div>
-                        <button className="arrow-button" onClick={() => setIsMore(!isMore)}>
-                          <img className="arrow" src="/assets/Arrow.png" />
-                        </button>
-                      </div>
-                  ) : (
-                      // 더보기 버튼
-                      <div className="more">
-                        <div className="moreContent" onClick={() => setIsMore(!isMore)}>더보기</div>
-                        <button className="arrow-button" onClick={() => setIsMore(!isMore)}>
-                          <img className="arrow" src="/assets/Arrow.png" />
-                        </button>
-                      </div>
-                  )}
-                </div>
+              <div className='playerBaseScore'>
+                {
+                  stars.map((별) => {
+                    return(<span className='playerContainer'><span className='playerStar'>★</span></span>)
+                  })
+                  } */}
               </div>
+          </div>
+          
+        </div>
+        <div className="otherInfo" >
+          <div className="summary">
+            {movieSummary[id]}
           </div>
         </div>
-        <div className="videoContent">
-          <div className="likeContent">
-            <div className="title">내가 찜한 콘텐츠</div>
+        
+        <div className="playerList">
+          <div className="ListName">
+              내가 찜한 콘텐츠
           </div>
+          <div className="MovieLists">
+            <div class="photo-container">
+              <img src="/assets/posterImg1.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+
+            <div class="photo-container">
+              <img src="/assets/posterImg2.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+
+            <div class="photo-container">
+              <img src="/assets/posterImg3.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+
+            <div class="photo-container">
+              <img src="/assets/posterImg16.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+
+            <div class="photo-container">
+              <img src="/assets/posterImg19.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="playerList">
+          <div className="ListName">
+            관련영화
+          </div>
+          <div className="MovieLists">
+            <div class="photo-container">
+              <img src="/assets/posterImg12.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+
+            <div class="photo-container">
+              <img src="/assets/posterImg25.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+
+            <div class="photo-container">
+              <img src="/assets/posterImg23.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+
+            <div class="photo-container">
+              <img src="/assets/posterImg10.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+
+            <div class="photo-container">
+              <img src="/assets/posterImg9.svg" class="photo" />
+              <div className="movieDetail">제목</div>
+              <div class="description">감독</div>
+            </div>
+            </div>
         </div>
       </div>
     </div>
@@ -492,3 +525,23 @@ function Player(){
 }
 
 export default Player;
+
+
+// function MovieList() {
+  
+//   const sortedMovieData = movieData.sort((a, b) => a.title.localeCompare(b.title));
+
+//   return (
+//     <div className="MovieLists">
+//       {sortedMovieData.map(movie => (
+//         <div key={movie.id} className="photo-container">
+//           <img src={movie.posterImg} alt={movie.title} className="photo" />
+//           <p className="movieDetail">{movie.title}</p>
+//           <p className="description">{movie.summary}</p>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+

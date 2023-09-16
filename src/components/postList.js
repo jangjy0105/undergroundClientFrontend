@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import formatDatetime from "../functions/parseDate";
 
 function PostList(props) {
@@ -11,6 +12,8 @@ function PostList(props) {
   const pages = [];
   const [currPage, setCurrPage] = useState(1);
   const [sortOption, setSortOption] = useState(null);
+
+  const navigate = useNavigate();
 
   for(let i=0; i<totalPage; i++) { pages[i] = i+1; }
 
@@ -41,6 +44,7 @@ function PostList(props) {
   return(
     <div className="postList">
     <h1>공지</h1>
+    <button className="writeBtn" onClick={() => {navigate('/customerService/inquiry/inquiryPost')}}>글쓰기</button>
     <div className="listBox">
       <ul>
         <li>

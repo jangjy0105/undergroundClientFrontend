@@ -33,6 +33,11 @@ let tagData = [
     tagIcon : "/assets/tag4.svg",
     tagOpen : true, 
     movieIds : [20,21,22,23,24,25],
+
+    id : 5,
+    tagName : "내가 찜한 콘텐츠",
+    tagOpen : true, 
+    movieIds : [1,24,13,6,9,26,27],
   },
 ]
 

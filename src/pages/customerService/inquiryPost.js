@@ -22,7 +22,9 @@ function InquiryPost() {
           <span className="inputName">분류</span>
           <select value={inquiryCategory} onChange={(e) => {setInquiryCategory(e.target.value)}}>
             <option key='선택하기' value='선택하기'>선택하기</option>
-            <option key='계정' value='계정'>계정</option>
+            <option key='계정' value='계정'>
+              계정
+            </option>
             <option key='결제' value='결제'>결제</option>
             <option key='영화 등록 문의' value='영화 등록 문의'>영화 등록 문의</option>
             <option key='오류' value='오류'>오류</option>

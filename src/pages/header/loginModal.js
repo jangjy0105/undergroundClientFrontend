@@ -8,7 +8,7 @@ function LoginModal(props) {
   const [warnning, setWarnning] = useState(false);
   const [findMode, setFindMode] = useState(false);
   const [confirmEmail, setconfirmEmail] = useState(false);
-  const [phoneModalOpen, setPhoneModalOpen] = useState(false)
+  const [confirmPhone, setconfirmPhone] = useState(false)
   const navigate = useNavigate();
   const login = () => {
     axios.post('http://34.64.176.187:8090/member/signin', {mem_id: loginId, mem_pass: loginPw}, {"Content-Type": 'application/json'})
@@ -17,6 +17,10 @@ function LoginModal(props) {
     })
     .catch((err) => {console.log(err)})
   }
+
+  
+
+  
 
   return (
     <div>
@@ -33,19 +37,69 @@ function LoginModal(props) {
         null
       }
 
+      {
+        confirmEmail
+        ?
+        <button className="backBtn" onClick={() => {setconfirmEmail(false)}}>
+          <img className="backBtnIcon" src={process.env.PUBLIC_URL + '/assets/backBtnIcon.svg'} />
+        </button>
+        :
+        null
+      }
+
+      {
+        confirmPhone
+        ?
+        <button className="backBtn" onClick={() => {setconfirmPhone(false)}}>
+          <img className="backBtnIcon" src={process.env.PUBLIC_URL + '/assets/backBtnIcon.svg'} />
+        </button>
+        :
+        null
+      }
+      
+
       <button className="closeBtn" onClick={() => {props.setLoginModal(false)}}>
         <img className="closeBtnIcon" src={process.env.PUBLIC_URL + '/assets/exitIcon.svg'} />
       </button>
       
       {
         confirmEmail ? (
-          <div className="confirmEmail">
-            안녕하세요
+          <div className="confirmEmailModal">
+            이메일 인증
+            <div className="userEmail">
+              이메일
+              <div className="email-container">
+              {/* 이메일 입력 필드 */}
+              <input type="text" placeholder="이메일" />
+              <span> @ </span>
+              <select>
+                <option>example.com</option>
+              </select>
+              <button className="btn">인증번호 받기</button> 
+              <div className="email-container">
+                {/* 인증번호 입력 필드 */}
+                <input type="text" placeholder="인증번호" />
+                <button className="btn">인증</button>
+              </div>
+            </div>
+            </div>
           </div>
         ) : (
-          phoneModalOpen ? (
+          confirmPhone ? (
             // 전화번호 모달 내용
-            <div className="phoneModalContent">전화번호인증</div>
+            <div className="confirmPhoneModal">
+              전화번호 인증
+              <div className="userPhone">전화번호</div>
+              <div className="input-container">
+                <input type="tel" placeholder="전화번호" />
+              </div>
+              <button className="btn">인증번호 받기</button> 
+              <div className="input-container">
+                {/* 인증번호 입력 필드 */}
+                <input type="text" placeholder="인증번호" />
+                <button className="btn">인증</button>
+              </div>
+            </div>
           ) : (
           
           findMode
@@ -53,7 +107,7 @@ function LoginModal(props) {
           <div className="find">
             <div className="confirmBtns">
             <div className="confirmBtnBox">
-              <button onClick={() => {setPhoneModalOpen(true)}}>
+              <button onClick={() => {setconfirmPhone(true)}}>
                 <img src={process.env.PUBLIC_URL + '/assets/telephone.svg'} />
               </button>
               <div className="confirmWay">전화번호 인증</div>
@@ -78,7 +132,7 @@ function LoginModal(props) {
             <input type="checkbox" className="checkbox"></input>
             <span> 아이디 저장</span>
           </div>
-          <button className="loginBtn" onClick={login}>로그인</button>
+          <button className="loginBtn" onClick={() => {setWarnning(true)}}>로그인</button>
           <button className="findBtn" onClick={() => {setFindMode(true)}}>아이디 / 비밀번호 찾기</button>
           <div className="RUMember">
             <span>아직 회원이 아니신가요?</span>
