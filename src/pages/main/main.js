@@ -84,7 +84,7 @@ function MovieLists(props) {
       <div className='voidReducedTag'>
         <div className='blank' />
         <div className='scrollBtn'>
-          <img src='assets/scrollBtn.png' />
+          <img src={process.env.PUBLIC_URL + 'assets/scrollBtn.png'} />
         </div>
       </div>}
         <ul className="movieScroll" ref={ref}>

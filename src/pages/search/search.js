@@ -1,6 +1,5 @@
-import { colors } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-// import '../App.scss'
+import '../App.scss'
 
 
 function Search(props) {
